@@ -1,0 +1,45 @@
+# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+import os
+
+def build(bld):
+    obj = bld.create_ns3_program('spdash-example-p2p', ['spdash', 'point-to-point'])
+    obj.source = 'spdash/spdash-example-p2p.cc'
+    
+    
+    # obj = bld.create_ns3_program('download-example-p2p', ['spdash', 'point-to-point'])
+    # obj.source = 'download-example-p2p.cc'
+    
+    
+    obj = bld.create_ns3_program('spdash-example-bus', ['spdash', 'point-to-point', "csma"])
+    obj.source = 'spdash/spdash-example-bus.cc'
+
+    obj = bld.create_ns3_program('spdash-example-wifi', ['spdash','wifi'])
+    obj.source = 'spdash/spdash-example-wifi.cc'
+
+    ####################
+
+    obj = bld.create_ns3_program('dash-example-p2p', ['spdash', 'point-to-point'])
+    obj.source = 'dash/dash-example-p2p.cc'
+    
+    
+    obj = bld.create_ns3_program('download-example-p2p', ['spdash', 'point-to-point'])
+    obj.source = 'dash/download-example-p2p.cc'
+    
+    
+    obj = bld.create_ns3_program('dash-example-bus', ['spdash', 'point-to-point', "csma"])
+    obj.source = 'dash/dash-example-bus.cc'
+
+#     print(os.getcwd(), bld.__dict__)
+    all_modules = [mod[len("ns3-"):] for mod in bld.env['NS3_ENABLED_MODULES'] + bld.env['NS3_ENABLED_CONTRIBUTED_MODULES']]
+    obj = bld.create_ns3_program('wifi-tcp-zigzag', all_modules)
+    obj.source = "spdash/wifi-tcp-zigzag.cc"
+    
+    obj = bld.create_ns3_program('wifi-dash-zigzag', all_modules)
+    obj.source = "spdash/wifi-dash-zigzag.cc"
+    
+#     for filename in os.listdir(str(bld.path)+'/dash'):
+#         if not filename.startswith("cttc-") or not filename.endswith(".cc"):
+#             continue
+#         name = filename[:-len(".cc")]
+#         obj = bld.create_ns3_program(name, all_modules)
+#         obj.source = 'dash/'+filename
