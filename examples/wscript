@@ -2,40 +2,40 @@
 import os
 
 def build(bld):
-    obj = bld.create_ns3_program('spdash-example-p2p', ['spdash', 'point-to-point'])
-    obj.source = 'spdash/spdash-example-p2p.cc'
+    obj = bld.create_ns3_program('endash-example-p2p', ['endash', 'point-to-point'])
+    obj.source = 'endash/endash-example-p2p.cc'
     
     
-    # obj = bld.create_ns3_program('download-example-p2p', ['spdash', 'point-to-point'])
+    # obj = bld.create_ns3_program('download-example-p2p', ['endash', 'point-to-point'])
     # obj.source = 'download-example-p2p.cc'
     
     
-    obj = bld.create_ns3_program('spdash-example-bus', ['spdash', 'point-to-point', "csma"])
-    obj.source = 'spdash/spdash-example-bus.cc'
+    obj = bld.create_ns3_program('endash-example-bus', ['endash', 'point-to-point', "csma"])
+    obj.source = 'endash/endash-example-bus.cc'
 
-    obj = bld.create_ns3_program('spdash-example-wifi', ['spdash','wifi'])
-    obj.source = 'spdash/spdash-example-wifi.cc'
+    obj = bld.create_ns3_program('endash-example-wifi', ['endash','wifi'])
+    obj.source = 'endash/endash-example-wifi.cc'
 
     ####################
 
-    obj = bld.create_ns3_program('dash-example-p2p', ['spdash', 'point-to-point'])
+    obj = bld.create_ns3_program('dash-example-p2p', ['endash', 'point-to-point'])
     obj.source = 'dash/dash-example-p2p.cc'
     
     
-    obj = bld.create_ns3_program('download-example-p2p', ['spdash', 'point-to-point'])
+    obj = bld.create_ns3_program('download-example-p2p', ['endash', 'point-to-point'])
     obj.source = 'dash/download-example-p2p.cc'
     
     
-    obj = bld.create_ns3_program('dash-example-bus', ['spdash', 'point-to-point', "csma"])
+    obj = bld.create_ns3_program('dash-example-bus', ['endash', 'point-to-point', "csma"])
     obj.source = 'dash/dash-example-bus.cc'
 
 #     print(os.getcwd(), bld.__dict__)
     all_modules = [mod[len("ns3-"):] for mod in bld.env['NS3_ENABLED_MODULES'] + bld.env['NS3_ENABLED_CONTRIBUTED_MODULES']]
     obj = bld.create_ns3_program('wifi-tcp-zigzag', all_modules)
-    obj.source = "spdash/wifi-tcp-zigzag.cc"
+    obj.source = "endash/wifi-tcp-zigzag.cc"
     
     obj = bld.create_ns3_program('wifi-dash-zigzag', all_modules)
-    obj.source = "spdash/wifi-dash-zigzag.cc"
+    obj.source = "endash/wifi-dash-zigzag.cc"
     
 #     for filename in os.listdir(str(bld.path)+'/dash'):
 #         if not filename.startswith("cttc-") or not filename.endswith(".cc"):

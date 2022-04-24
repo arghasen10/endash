@@ -20,7 +20,7 @@
 #include "ns3/point-to-point-module.h"
 //#include "ns3/applications-module.h"
 //#include "ns3/http-helper.h"
-#include "ns3/spdash-helper.h"
+#include "ns3/endash-helper.h"
 #include "ns3/type-id.h"
 
 using namespace ns3;
@@ -66,16 +66,16 @@ int main(int argc, char *argv[]) {
 
 	Ipv4InterfaceContainer interfaces = address.Assign(devices);
 
-	SpDashServerHelper echoServer(9);
+	endashServerHelper echoServer(9);
 	ApplicationContainer serverApps = echoServer.Install(nodes.Get(1));
 	serverApps.Start(Seconds(1.0));
 //  serverApps.Stop (Seconds (10.0));
 
 	int counter = 0;
 
-	SpDashClientHelper dashClient(interfaces.GetAddress(1), 9);
+	endashClientHelper dashClient(interfaces.GetAddress(1), 9);
 	dashClient.SetAttribute("VideoFilePath",
-			StringValue("src/spdash/examples/vid.txt"));
+			StringValue("src/endash/examples/vid.txt"));
 
 	dashClient.SetAttribute("OnStartCB",
 			CallbackValue(MakeBoundCallback(onStart, &counter)));
@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
 	ApplicationContainer clientApps = dashClient.Install(nodes.Get(0));
 	clientApps.Start(Seconds(2.0));
 
-	pointToPoint.EnablePcapAll("spdash-p2p");
+	pointToPoint.EnablePcapAll("endash-p2p");
 	Simulator::Run();
 	Simulator::Destroy();
 	return 0;

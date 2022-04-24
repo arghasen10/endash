@@ -1,5 +1,5 @@
 /*
- * spdash-example-bus.cc
+ * endash-example-bus.cc
  *
  *  Created on: 04-Apr-2020
  *      Author: abhijit
@@ -13,7 +13,7 @@
 //#include "ns3/applications-module.h"
 #include "ns3/http-helper.h"
 #include "ns3/ipv4-global-routing-helper.h"
-#include "ns3/spdash-helper.h"
+#include "ns3/endash-helper.h"
 #include "ns3/type-id.h"
 #include<fstream>
 
@@ -93,16 +93,16 @@ int main(int argc, char *argv[]) {
 	Ipv4InterfaceContainer csmaInterfaces;
 	csmaInterfaces = address.Assign(csmaDevices);
 
-	SpDashServerHelper echoServer(9);
+	endashServerHelper echoServer(9);
 	ApplicationContainer serverApps = echoServer.Install(csmaNodes.Get(0));
 	serverApps.Start(Seconds(1.0));
 //  serverApps.Stop (Seconds (10.0));
 
 	int counter = 0;
 //  Get(0) = server
-	SpDashClientHelper dashClient(csmaInterfaces.GetAddress(0), 9);
+	endashClientHelper dashClient(csmaInterfaces.GetAddress(0), 9);
 	dashClient.SetAttribute("VideoFilePath",
-			StringValue("src/spdash/examples/vid.txt"));
+			StringValue("src/endash/examples/vid.txt"));
 
 	dashClient.SetAttribute("OnStartCB",
 			CallbackValue(MakeBoundCallback(onStart, &counter)));
@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
 
 	Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
-	csma.EnablePcapAll("spdash-p2p");
+	csma.EnablePcapAll("endash-p2p");
 	Simulator::Run();
 	Simulator::Destroy();
 	return 0;
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]) {
 // 	Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
 // //	pointToPoint.EnablePcapAll("second");
-// 	pointToPoint.EnablePcap("spdash-bus", p2pDevices.Get(0), true);
+// 	pointToPoint.EnablePcap("endash-bus", p2pDevices.Get(0), true);
 
 // 	Simulator::Run();
 // 	Simulator::Destroy();

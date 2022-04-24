@@ -5,19 +5,19 @@
  *      Author: abhijit
  */
 
-#ifndef SRC_SPDASH_MODEL_SPDASH_SPDASH_REQUEST_HANDLER_H_
-#define SRC_SPDASH_MODEL_SPDASH_SPDASH_REQUEST_HANDLER_H_
+#ifndef SRC_ENDASH_MODEL_ENDASH_ENDASH_REQUEST_HANDLER_H_
+#define SRC_ENDASH_MODEL_ENDASH_ENDASH_REQUEST_HANDLER_H_
 
 #include "ns3/dash-request-handler.h"
 #include "ns3/dash-common.h"
 
 namespace ns3 {
 
-class SpDashRequestHandler: public DashRequestHandler {
+class endashRequestHandler: public DashRequestHandler {
 public:
 	static TypeId GetTypeId(void);
-	SpDashRequestHandler();
-	virtual ~SpDashRequestHandler();
+	endashRequestHandler();
+	virtual ~endashRequestHandler();
 protected:
   virtual void RequestHeaderReceived();
 
@@ -34,4 +34,4 @@ private:
 
 } /* namespace ns3 */
 
-#endif /* SRC_SPDASH_MODEL_DASH_DASH_REQUEST_HANDLER_H_ */
+#endif /* SRC_ENDASH_MODEL_DASH_DASH_REQUEST_HANDLER_H_ */

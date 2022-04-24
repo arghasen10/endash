@@ -24,7 +24,7 @@
 #include "ns3/yans-wifi-helper.h"
 #include "ns3/wifi-module.h"
 #include "ns3/ssid.h"
-#include "ns3/spdash-helper.h"
+#include "ns3/endash-helper.h"
 
 // Default Network Topology
 //
@@ -143,17 +143,17 @@ main (int argc, char *argv[])
 
 
 
-  SpDashServerHelper echoServer(9);
+  endashServerHelper echoServer(9);
   ApplicationContainer serverApps = echoServer.Install(wifiApNode.Get(0));
   serverApps.Start(Seconds(1.0));
 //  serverApps.Stop (Seconds (10.0));
 
   int counter = 0;
 //  Get(0) = server
-  SpDashClientHelper dashClient(wifiInterface.GetAddress(0), 9);
+  endashClientHelper dashClient(wifiInterface.GetAddress(0), 9);
 
   dashClient.SetAttribute("VideoFilePath",
-      StringValue("src/spdash/examples/vid.txt"));
+      StringValue("src/endash/examples/vid.txt"));
 
   dashClient.SetAttribute("OnStartCB",
       CallbackValue(MakeBoundCallback(onStart, &counter)));
@@ -175,7 +175,7 @@ main (int argc, char *argv[])
 
   Ipv4GlobalRoutingHelper::PopulateRoutingTables();
 
-  // csma.EnablePcapAll("spdash-wireless");
+  // csma.EnablePcapAll("endash-wireless");
   Simulator::Run();
   Simulator::Destroy();
   return 0;

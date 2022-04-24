@@ -5,9 +5,9 @@
  *      Author: abhijit
  */
 
-#include "spdash-helper.h"
-#include "ns3/spdash-request-handler.h"
-#include "ns3/spdash-video-player.h"
+#include "endash-helper.h"
+#include "ns3/endash-request-handler.h"
+#include "ns3/endash-video-player.h"
 // #include "ns3/dash-file-downloader.h"
 #include "ns3/http-server.h"
 #include "ns3/uinteger.h"
@@ -15,30 +15,30 @@
 
 namespace ns3 {
 
-SpDashServerHelper::SpDashServerHelper(uint16_t port) :
+endashServerHelper::endashServerHelper(uint16_t port) :
 		HttpServerHelper(port) {
 	ObjectFactory dashHandlerFactory;
-	dashHandlerFactory.SetTypeId(SpDashRequestHandler::GetTypeId());
+	dashHandlerFactory.SetTypeId(endashRequestHandler::GetTypeId());
 	SetAttribute("HttpRequestHandlerTypeId",
-			TypeIdValue(SpDashRequestHandler::GetTypeId()));
+			TypeIdValue(endashRequestHandler::GetTypeId()));
 }
 
 } /* namespace ns3 */
 
 namespace ns3 {
 
-SpDashClientHelper::SpDashClientHelper(Address addr, uint16_t port) {
-	m_factory.SetTypeId(SpDashVideoPlayer::GetTypeId());
+endashClientHelper::endashClientHelper(Address addr, uint16_t port) {
+	m_factory.SetTypeId(endashVideoPlayer::GetTypeId());
 	SetAttribute("RemoteAddress", AddressValue(Address(addr)));
 	SetAttribute("RemotePort", UintegerValue(port));
 }
 
-void SpDashClientHelper::SetAttribute(std::string name,
+void endashClientHelper::SetAttribute(std::string name,
 		const AttributeValue &value) {
 	m_factory.Set(name, value);
 }
 
-ApplicationContainer SpDashClientHelper::Install(NodeContainer nodes) const {
+ApplicationContainer endashClientHelper::Install(NodeContainer nodes) const {
 	ApplicationContainer apps;
 	for (auto it = nodes.Begin(); it != nodes.End(); ++it) {
 		apps.Add(InstallPriv(*it));
@@ -46,12 +46,12 @@ ApplicationContainer SpDashClientHelper::Install(NodeContainer nodes) const {
 	return apps;
 }
 
-ApplicationContainer SpDashClientHelper::Install(Ptr<Node> node) const {
+ApplicationContainer endashClientHelper::Install(Ptr<Node> node) const {
 	return ApplicationContainer(InstallPriv(node));
 }
 
-Ptr<Application> SpDashClientHelper::InstallPriv(Ptr<Node> node) const {
-	Ptr<Application> app = m_factory.Create<SpDashVideoPlayer>();
+Ptr<Application> endashClientHelper::InstallPriv(Ptr<Node> node) const {
+	Ptr<Application> app = m_factory.Create<endashVideoPlayer>();
 	node->AddApplication(app);
 
 	return app;

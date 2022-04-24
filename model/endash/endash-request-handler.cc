@@ -1,11 +1,11 @@
 /*
- * spdash-request-handler.cc
+ * endash-request-handler.cc
  *
  *  Created on: 08-Apr-2020
  *      Author: abhijit
  */
 
-#include "spdash-request-handler.h"
+#include "endash-request-handler.h"
 #include <ns3/core-module.h>
 #include "ns3/nlohmann_json.h"
 #include <sys/types.h>          /* See NOTES */
@@ -36,32 +36,32 @@ FromString (T val)
   return stream.str ();
 }
 
-NS_LOG_COMPONENT_DEFINE("SpDashRequestHandler");
-NS_OBJECT_ENSURE_REGISTERED(SpDashRequestHandler);
+NS_LOG_COMPONENT_DEFINE("endashRequestHandler");
+NS_OBJECT_ENSURE_REGISTERED(endashRequestHandler);
 
-TypeId SpDashRequestHandler::GetTypeId(void) {
-	static TypeId tid = TypeId("ns3::SpDashRequestHandler")
+TypeId endashRequestHandler::GetTypeId(void) {
+	static TypeId tid = TypeId("ns3::endashRequestHandler")
 			.SetParent<DashRequestHandler>()
 			.SetGroupName("Applications")
-			.AddConstructor<SpDashRequestHandler>();
+			.AddConstructor<endashRequestHandler>();
 	return tid;
 }
 
 
 
-SpDashRequestHandler::SpDashRequestHandler (): DashRequestHandler()
+endashRequestHandler::endashRequestHandler (): DashRequestHandler()
 {
 }
 
-SpDashRequestHandler::~SpDashRequestHandler ()
+endashRequestHandler::~endashRequestHandler ()
 {
 }
 
 //int
-//SpDashRequestHandler::ReadInVideoInfo ()
+//endashRequestHandler::ReadInVideoInfo ()
 //{
 //  NS_LOG_FUNCTION(this);
-//  // m_videoFilePath = "src/spdash/examples/vid.txt";	 //remove it
+//  // m_videoFilePath = "src/endash/examples/vid.txt";	 //remove it
 //  std::ifstream myfile;
 //  myfile.open (m_videoFilePath);
 //  NS_ASSERT(myfile);
@@ -110,7 +110,7 @@ SpDashRequestHandler::~SpDashRequestHandler ()
 //}
 
 std::string
-SpDashRequestHandler::CreateRequestString (std::string cookie, std::string nextChunkId,
+endashRequestHandler::CreateRequestString (std::string cookie, std::string nextChunkId,
                                            std::string lastQuality, std::string buffer,
                                            std::string lastRequest,
                                            std::string rebufferTime,
@@ -148,7 +148,7 @@ SpDashRequestHandler::CreateRequestString (std::string cookie, std::string nextC
 
 //Adds header in response
 int
-SpDashRequestHandler::Abr (std::string cookie, std::string segmentNum,
+endashRequestHandler::Abr (std::string cookie, std::string segmentNum,
                            std::string lastQuality, std::string buffer,
                            std::string lastRequest, std::string rebufferTime,
                            std::string lastChunkFinishTime,
@@ -220,7 +220,7 @@ SpDashRequestHandler::Abr (std::string cookie, std::string segmentNum,
 
 //store info in server
 void
-SpDashRequestHandler::RequestHeaderReceived ()
+endashRequestHandler::RequestHeaderReceived ()
 {
   NS_LOG_FUNCTION(this);
   // std::string responseLen = GetHeader("X-Require-Length");

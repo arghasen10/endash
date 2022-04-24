@@ -5,11 +5,11 @@
  *      Author: abhijit
  */
 
-#ifndef SRC_SPDASH_MODEL_SPDASH_SPDASH_VIDEO_PLAYER_H_
-#define SRC_SPDASH_MODEL_SPDASH_SPDASH_VIDEO_PLAYER_H_
+#ifndef SRC_ENDASH_MODEL_ENDASH_ENDASH_VIDEO_PLAYER_H_
+#define SRC_ENDASH_MODEL_ENDASH_ENDASH_VIDEO_PLAYER_H_
 
 #include "ns3/dash-video-player.h"
-//#include "spdash-common.h"
+//#include "endash-common.h"
 //#include "ns3/application.h"
 //#include "ns3/http-client-basic.h"
 #include <fstream>
@@ -17,11 +17,11 @@
 namespace ns3 {
 
 
-class SpDashVideoPlayer:public DashVideoPlayer {
+class endashVideoPlayer:public DashVideoPlayer {
 public:
   static TypeId GetTypeId(void);
-  SpDashVideoPlayer();
-  virtual ~SpDashVideoPlayer();
+  endashVideoPlayer();
+  virtual ~endashVideoPlayer();
 
 private:
   /********************************
@@ -35,4 +35,4 @@ private:
 
 } /* namespace ns3 */
 
-#endif /* SRC_SPDASH_MODEL_DASH_DASH_VIDEO_PLAYER_H_ */
+#endif /* SRC_ENDASH_MODEL_DASH_DASH_VIDEO_PLAYER_H_ */

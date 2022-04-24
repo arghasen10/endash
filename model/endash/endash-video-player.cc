@@ -5,27 +5,27 @@
  *      Author: abhijit
  */
 
-#include "spdash-video-player.h"
+#include "endash-video-player.h"
 
 namespace ns3 {
 
-NS_LOG_COMPONENT_DEFINE("SpDashVideoPlayer");
-NS_OBJECT_ENSURE_REGISTERED(SpDashVideoPlayer);
+NS_LOG_COMPONENT_DEFINE("endashVideoPlayer");
+NS_OBJECT_ENSURE_REGISTERED(endashVideoPlayer);
 
 TypeId
-SpDashVideoPlayer::GetTypeId(void)
+endashVideoPlayer::GetTypeId(void)
 {
-  static TypeId tid = TypeId("ns3::SpDashVideoPlayer")
+  static TypeId tid = TypeId("ns3::endashVideoPlayer")
     .SetParent<DashVideoPlayer>()
     .SetGroupName("Applications")
-    .AddConstructor<SpDashVideoPlayer>();
+    .AddConstructor<endashVideoPlayer>();
   return tid;
 }
 
-SpDashVideoPlayer::SpDashVideoPlayer(): DashVideoPlayer(){
+endashVideoPlayer::endashVideoPlayer(): DashVideoPlayer(){
 }
 
-SpDashVideoPlayer::~SpDashVideoPlayer(){
+endashVideoPlayer::~endashVideoPlayer(){
 }
 
 /****************************************
@@ -33,7 +33,7 @@ SpDashVideoPlayer::~SpDashVideoPlayer(){
  ****************************************/
 
 void
-SpDashVideoPlayer::StartDash ()
+endashVideoPlayer::StartDash ()
 {
   NS_LOG_FUNCTION(this);
   if (!m_running)
@@ -50,8 +50,8 @@ SpDashVideoPlayer::StartDash ()
     }
 
   Ptr<Ipv4L3Protocol> ipnode = GetNode ()->GetObject<Ipv4L3Protocol> ();
-  ipnode->TraceConnectWithoutContext ("Tx", MakeCallback (&SpDashVideoPlayer::TxTracedCallback, this));
-  ipnode->TraceConnectWithoutContext ("Rx", MakeCallback (&SpDashVideoPlayer::RxTracedCallback, this));
+  ipnode->TraceConnectWithoutContext ("Tx", MakeCallback (&endashVideoPlayer::TxTracedCallback, this));
+  ipnode->TraceConnectWithoutContext ("Rx", MakeCallback (&endashVideoPlayer::RxTracedCallback, this));
 
   const clen_t expected = 1232; //Arbit
   m_playback.m_curSegmentNum = 0;
@@ -60,8 +60,8 @@ SpDashVideoPlayer::StartDash ()
 
   m_httpDownloader = Create<HttpClientBasic> ();
   m_httpDownloader->SetTimeout (m_timeout);
-  m_httpDownloader->SetCollectionCB (MakeCallback (&SpDashVideoPlayer::DownloadedCB, this).Bind (Ptr<Object> ()),
-                                     MakeCallback (&SpDashVideoPlayer::DownloadFailedCB, this).Bind (Ptr<Object> ()),
+  m_httpDownloader->SetCollectionCB (MakeCallback (&endashVideoPlayer::DownloadedCB, this).Bind (Ptr<Object> ()),
+                                     MakeCallback (&endashVideoPlayer::DownloadFailedCB, this).Bind (Ptr<Object> ()),
                                      GetNode ());
   m_httpDownloader->InitConnection (m_serverAddress, m_serverPort, "/mpd");
 //  m_httpDownloader->AddReqHeader ("videoPath", m_videoFilePath);
@@ -75,7 +75,7 @@ SpDashVideoPlayer::StartDash ()
 }
 
 void
-SpDashVideoPlayer::DownloadNextSegment ()
+endashVideoPlayer::DownloadNextSegment ()
 {
   NS_LOG_FUNCTION(this);
   if (!m_running)
@@ -116,7 +116,7 @@ SpDashVideoPlayer::DownloadNextSegment ()
 }
 
 void
-SpDashVideoPlayer::DownloadedCB (Ptr<Object> obj)
+endashVideoPlayer::DownloadedCB (Ptr<Object> obj)
 {
   NS_LOG_FUNCTION(this);
 
@@ -127,7 +127,7 @@ SpDashVideoPlayer::DownloadedCB (Ptr<Object> obj)
   m_segmentDuration = MicroSeconds(std::stoi(m_httpDownloader->GetResponse ()->GetHeader ("X-SegmentDuration")));
   // std::cout<<m_cookie<<" "<<m_lastQuality<<" "<<m_lastChunkSize<<"\n";
   m_lastChunkFinishTime = Simulator::Now ();
-  Simulator::ScheduleNow (&SpDashVideoPlayer::Downloaded, this);
+  Simulator::ScheduleNow (&endashVideoPlayer::Downloaded, this);
 }
 
 } /* namespace ns3 */

@@ -5,26 +5,26 @@
  *      Author: abhijit
  */
 
-#ifndef SRC_SPDASH_HELPER_SPDASH_HELPER_H_
-#define SRC_SPDASH_HELPER_SPDASH_HELPER_H_
+#ifndef SRC_ENDASH_HELPER_ENDASH_HELPER_H_
+#define SRC_ENDASH_HELPER_ENDASH_HELPER_H_
 
 #include "http-helper.h"
 
 namespace ns3 {
 
-class SpDashServerHelper: public HttpServerHelper {
+class endashServerHelper: public HttpServerHelper {
 public:
-	SpDashServerHelper(uint16_t port);
+	endashServerHelper(uint16_t port);
 };
 
 } /* namespace ns3 */
 
 namespace ns3 {
 
-class SpDashClientHelper {
+class endashClientHelper {
 public:
-	SpDashClientHelper(Address addr, uint16_t port);
-	virtual ~SpDashClientHelper() {
+	endashClientHelper(Address addr, uint16_t port);
+	virtual ~endashClientHelper() {
 	}
 	void SetAttribute(std::string name, const AttributeValue &value);
 	ApplicationContainer Install(Ptr<Node> node) const;
@@ -54,5 +54,5 @@ protected:
 };
 
 } /* namespace ns3 */
-#endif /* SRC_SPDASH_HELPER_DASH_HELPER_H_ */
+#endif /* SRC_ENDASH_HELPER_DASH_HELPER_H_ */
 
